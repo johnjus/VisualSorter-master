@@ -56,10 +56,57 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void mergeSort(int[] ar)
-    {
+    private void merge(int lowerIndex, int middle, int higherIndex) {
+        int[] temArr = new int[unsortedNumbers.length];
 
+        for (int i = lowerIndex; i <= higherIndex; i++)
+        {
+            temArr[i] = unsortedNumbers[i];
+        }
+        int i = lowerIndex;
+        int j = middle + 1;
+        int k = lowerIndex;
+        while (i <= middle && j <= higherIndex)
+        {
+            if (temArr[i] <= temArr[j])
+            {
+                unsortedNumbers[k] = temArr[i];
+                i++;
+            } else
+            {
+                unsortedNumbers[k] = temArr[j];
+                j++;
+            }
+            k++;
+        }
+        while (i <= middle)
+        {
+            unsortedNumbers[k] = temArr[i];
+            k++;
+            i++;
+        }
     }
+
+    private void mergeSort(int lowerIndex, int higherIndex) {
+
+        if (lowerIndex < higherIndex) {
+            int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
+            //sorts the left side of the array
+            mergeSort(lowerIndex, middle);
+            //sorts the right side of the array
+            mergeSort(middle + 1, higherIndex);
+            //merge both sides
+            merge(lowerIndex, middle, higherIndex);
+        }
+    }
+
+    private void getIndexes(int[] ar)
+    {
+        mergeSort(0, ar.length-1);
+    }
+
+
+
 
     //recursion refresher example
     //5! = 5 * 4 * 3 * 2 * 1 -> 5 * 4!
@@ -82,7 +129,7 @@ public class MainActivity extends AppCompatActivity
     public void mergeSortButtonPressed(View vy)
     {
         //perform a merge sort on the unsortedArray
-        this.mergeSort(this.unsortedNumbers);
+        this.getIndexes(this.unsortedNumbers);
         this.updateStringArrays();
     }
 
