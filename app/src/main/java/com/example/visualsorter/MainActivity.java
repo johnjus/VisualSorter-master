@@ -57,11 +57,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void merge(int lowerIndex, int middle, int higherIndex) {
-        int[] temArr = new int[unsortedNumbers.length];
+        int[] temArr = new int[this.unsortedNumbers.length];
 
         for (int i = lowerIndex; i <= higherIndex; i++)
         {
-            temArr[i] = unsortedNumbers[i];
+            temArr[i] = this.unsortedNumbers[i];
         }
         int i = lowerIndex;
         int j = middle + 1;
@@ -70,18 +70,18 @@ public class MainActivity extends AppCompatActivity
         {
             if (temArr[i] <= temArr[j])
             {
-                unsortedNumbers[k] = temArr[i];
+                this.unsortedNumbers[k] = temArr[i];
                 i++;
             } else
             {
-                unsortedNumbers[k] = temArr[j];
+                this.unsortedNumbers[k] = temArr[j];
                 j++;
             }
             k++;
         }
         while (i <= middle)
         {
-            unsortedNumbers[k] = temArr[i];
+            this.unsortedNumbers[k] = temArr[i];
             k++;
             i++;
         }
